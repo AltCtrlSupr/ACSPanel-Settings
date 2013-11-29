@@ -43,6 +43,8 @@ abstract class SettingManager extends EntityRepository
         foreach($fields as $field){
 
             if(!$this->getSetting($field['setting_key'], $field['focus'], $user)){
+                if(!isset($field['default_value']))
+                    $field['default_value'] = '';
                 $this->setSetting($field['setting_key'], $field['focus'], $field['default_value'], $field['context'], $user);
             }
         }

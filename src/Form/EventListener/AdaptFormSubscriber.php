@@ -96,4 +96,3 @@ class AdaptFormSubscriber implements EventSubscriberInterface
 
 }
 
-?>
