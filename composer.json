@@ -1,7 +1,7 @@
 {
     "name": "acs/panelsettings",
     "description": "Settings bundle used by ACSPanel",
-    "type": "library"
+    "type": "library",
     "autoload": {
         "psr-0": { "": "src/" }
     },
