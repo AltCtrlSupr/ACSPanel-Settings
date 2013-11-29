@@ -19,6 +19,6 @@
         }
     ],
     "autoload": {
-        "classmap": ["lib"]
+        "classmap": ["src"]
     }
 }
