@@ -1,0 +1,12 @@
+{
+    "name": "acs/panelsettings",
+    "description": "Settings bundle used by ACSPanel",
+    "type": "library"
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "require": {
+        "php": ">=5.3.3",
+    },
+    "minimum-stability": "dev",
+}
