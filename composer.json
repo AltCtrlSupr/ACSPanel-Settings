@@ -20,6 +20,6 @@
         }
     ],
     "autoload": {
-        "classmap": ["src"]
+        "classmap": [""]
     }
 }
