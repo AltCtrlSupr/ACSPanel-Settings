@@ -152,9 +152,15 @@ class ConfigSettingController extends Controller
         $query = $contexts_rep->createQueryBuilder('ps')
             ->select('ps.context')
             ->where('ps.user = ?1')
+            ->andWhere('ps.context NOT LIKE ?2')
+            ->andWhere('ps.context NOT LIKE ?3')
+            ->andWhere('ps.context NOT LIKE ?4')
             ->groupBy('ps.context')
             ->orderBy('ps.context')
             ->setParameter('1',$user)
+            ->setParameter('2','internal')
+            ->setParameter('3','user_internal')
+            ->setParameter('4','system_internal')
             ->getQuery();
         $contexts = $query->execute();
 

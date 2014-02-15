@@ -3,7 +3,7 @@
     "description": "Settings bundle used by ACSPanel",
     "type": "library",
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-0": { "": "" }
     },
     "require": {
         "php": ">=5.3.3",
