@@ -1,5 +1,5 @@
 {
-    "name": "acs/panelsettings",
+    "name": "acs/acspanel-settings",
     "description": "Settings bundle used by ACSPanel",
     "type": "library",
     "autoload": {
