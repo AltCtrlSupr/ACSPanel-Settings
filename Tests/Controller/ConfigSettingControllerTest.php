@@ -2,9 +2,9 @@
 
 namespace ACS\ACSPanelSettingsBundle\Tests\Controller;
 
-use ACS\ACSPanelBundle\Tests\Controller\WebTestCase;
+use ACS\ACSPanelBundle\Tests\Controller\CommonTestCase;
 
-class ConfigSettingControllerTest extends WebTestCase
+class ConfigSettingControllerTest extends CommonTestCase
 {
     public function testCompleteScenario()
     {

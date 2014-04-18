@@ -2,9 +2,9 @@
 
 namespace ACS\ACSPanelSettingsBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use ACS\ACSPanelBundle\Tests\Controller\CommonTestCase;
 
-class DefaultControllerTest extends WebTestCase
+class DefaultControllerTest extends CommonTestCase
 {
     public function testIndex()
     {
