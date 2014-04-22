@@ -88,7 +88,7 @@ class ConfigSettingController extends Controller
      * Load the settings array to pass to form
      *
      */
-    public function loadUserFields()
+    private function loadUserFields()
     {
         $user_fields = array();
 
@@ -145,7 +145,7 @@ class ConfigSettingController extends Controller
      * Returns the context used to organize the settings view
      *
      */
-    public function getContexts($user)
+    private function getContexts($user)
     {
         $em = $this->getDoctrine()->getManager();
         $contexts_rep = $em->getRepository('ACSACSPanelBundle:PanelSetting');
