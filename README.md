@@ -44,3 +44,12 @@ Add the following config lines to configure your app setting entity:
             default_value:        ~
             context:              ~
             focus:                system_setting
+
+Extends your entity from the Bundle entity (Remember to not include id field in doctrine definition)
+
+    use ACS\ACSPanelSettingsBundle\Entity\ConfigSetting;
+
+    class UserSetting extends ConfigSetting
+    {
+        ...
+    }

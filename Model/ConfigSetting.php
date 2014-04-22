@@ -16,6 +16,9 @@ abstract class ConfigSetting
      */
     protected $value;
 
+    /**
+     * @var string
+     */
     protected $key;
 
 
