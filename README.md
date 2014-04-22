@@ -53,3 +53,9 @@ Extends your entity from the Bundle entity (Remember to not include id field in 
     {
         ...
     }
+
+Add the routes to app/routing.yml
+
+    acs_settings:
+        resource: "@ACSACSPanelSettingsBundle/Resources/config/routing.yml"
+        prefix:   /
