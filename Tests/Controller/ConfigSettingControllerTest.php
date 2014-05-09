@@ -15,9 +15,6 @@ class ConfigSettingControllerTest extends CommonTestCase
         $crawler = $this->client->request('GET', '/settings/');
         $this->assertTrue(200 === $client->getResponse()->getStatusCode());
 
-
-        // TODO: Test SettingManager service methods
-
     }
 
 }
