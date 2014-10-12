@@ -13,6 +13,7 @@ class ConfigSettingControllerTest extends CommonTestCase
 
         // Create a new entry in the database
         $crawler = $this->client->request('GET', '/settings/');
+        //ldd($crawler->html());
         $this->assertTrue(200 === $this->client->getResponse()->getStatusCode());
 
     }
