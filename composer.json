@@ -20,6 +20,6 @@
         }
     ],
     "autoload": {
-        "classmap": [""]
+        "classmap": ["Controller/*"]
     }
 }

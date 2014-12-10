@@ -25,7 +25,6 @@ class SettingsMenuSubscriber implements EventSubscriberInterface
     public function settingsItems(FilterMenuEvent $menu_filter)
     {
         $menu = $menu_filter->getMenu();
-        // TODO: Change the name of settings action
         $menu->addChild('menu.settings.main', array( 'route' => 'settings'));
     }
 }
