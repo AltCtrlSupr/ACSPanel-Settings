@@ -25,6 +25,6 @@ class SettingsMenuSubscriber implements EventSubscriberInterface
     public function settingsItems(FilterMenuEvent $menu_filter)
     {
         $menu = $menu_filter->getMenu();
-        $menu->addChild('menu.settings.main', array( 'route' => 'settings'));
+        $menu->addChild('menu.settings.main', array( 'route' => 'settings', 'extras' => array('icon' => 'fa-gear')));
     }
 }
