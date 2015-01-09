@@ -4,8 +4,6 @@ namespace ACS\ACSPanelSettingsBundle\Model;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
-use ACS\ACSPanelBundle\Entity\FosUser;
-
 abstract class SettingManager extends EntityRepository
 {
     private $container;
@@ -167,7 +165,7 @@ abstract class SettingManager extends EntityRepository
      * Gets user focus config value from database
      * @todo: Maybe could be good caching those values...
      */
-    public function getUserSetting($setting_key, FosUser $user)
+    public function getUserSetting($setting_key, $user)
     {
         $setting = $this->getSetting($setting_key, 'user_setting', $user);
         return $setting;
