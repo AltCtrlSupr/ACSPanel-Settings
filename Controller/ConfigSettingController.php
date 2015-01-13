@@ -11,7 +11,6 @@ use ACS\ACSPanelSettingsBundle\Event\FilterUserFieldsEvent;
 // TODO: Get this from config.yml
 use ACS\ACSPanelBundle\Entity\PanelSetting;
 // TODO: Get this from config.yml
-use ACS\ACSPanelBundle\Entity\FosUser;
 
 use ACS\ACSPanelBundle\Model\SettingManager;
 
@@ -179,7 +178,6 @@ class ConfigSettingController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         // TODO: Get from config.yml
-        //$entity = $em->getRepository('ACSACSPanelBundle:FosUser')->find($id);
         $entity = $this->get('security.context')->getToken()->getUser();
 
         if (!$entity) {

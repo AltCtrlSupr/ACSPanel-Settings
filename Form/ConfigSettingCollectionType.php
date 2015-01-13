@@ -41,7 +41,7 @@ class ConfigSettingCollectionType extends AbstractType
     {
         // TODO: Get value from config.yml
         $resolver->setDefaults(array(
-            'data_class' => 'ACS\ACSPanelBundle\Entity\FosUser',
+            'data_class' => 'ACS\ACSPanelUsersBundle\Entity\FosUser',
         ));
 
     }
