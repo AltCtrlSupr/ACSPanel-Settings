@@ -133,7 +133,7 @@ class ConfigSettingController extends Controller
 
         $contexts = $this->getContexts($user);
 
-        return $this->render('ACSACSPanelSettingsBundle:ConfigSetting:new.html.twig', array(
+        return $this->render('ACSACSPanelSettingsBundle:ConfigSetting:edit.html.twig', array(
             'entity' => $user,
             'contexts' => $contexts,
             'form'   => $form->createView(),
