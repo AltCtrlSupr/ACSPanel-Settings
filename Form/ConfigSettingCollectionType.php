@@ -2,8 +2,6 @@
 
 namespace ACS\ACSPanelSettingsBundle\Form;
 
-// @todo: check to load the correct entity
-//use ACS\ACSPanelSettingsBundle\Entity\ConfigSetting as ConfigSetting;
 use ACS\ACSPanelBundle\Entity\PanelSetting as ConfigSetting;
 
 use ACS\ACSPanelSettingsBundle\Form\ConfigSettingType;
@@ -39,9 +37,8 @@ class ConfigSettingCollectionType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        // TODO: Get value from config.yml
         $resolver->setDefaults(array(
-            'data_class' => 'ACS\ACSPanelUsersBundle\Entity\FosUser',
+            'data_class' => 'ACS\ACSPanelUsersBundle\Entity\User',
         ));
 
     }
