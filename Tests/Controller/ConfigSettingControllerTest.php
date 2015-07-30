@@ -9,13 +9,10 @@ class ConfigSettingControllerTest extends CommonTestCase
     public function testCompleteScenario()
     {
         // Create a new client to browse the application
-        $this->client = $this->createAuthorizedClient('superadmin','1234');
+        $client = $this->createAuthorizedClient('superadmin','1234');
 
         // Create a new entry in the database
-        $crawler = $this->client->request('GET', '/settings/');
-        //ldd($crawler->html());
-        $this->assertTrue(200 === $this->client->getResponse()->getStatusCode());
-
+        $crawler = $client->request('GET', '/settings/');
+        $this->assertTrue(200 === $client->getResponse()->getStatusCode());
     }
-
 }
