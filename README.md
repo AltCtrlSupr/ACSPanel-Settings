@@ -17,6 +17,10 @@ Add the next line to AppKernel:
 
     new ACS\ACSPanelSettingsBundle\ACSACSPanelSettingsBundle(),
 
+
+Setting up
+----------
+
 Add the following config lines to configure your app setting entity:
 
     acsacs_panel_settings:

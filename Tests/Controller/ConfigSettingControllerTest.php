@@ -14,5 +14,14 @@ class ConfigSettingControllerTest extends CommonTestCase
         // Create a new entry in the database
         $crawler = $client->request('GET', '/settings/');
         $this->assertTrue(200 === $client->getResponse()->getStatusCode());
+
+        // Form should accept empty protected dir
+        $form = $crawler->selectButton('Save')->form(array(
+            'acs_settings_usersettings[settings][10][value]' => 'dns.acs.li',
+        ));
+
+        $crawler = $client->submit($form);
+        // ldd($crawler->html());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 }

@@ -12,7 +12,6 @@ abstract class SettingManager extends EntityRepository
     {
         $this->container = $container;
         $class_object = new ClassMetadata($class);
-        $this->container = $container;
 
         parent::__construct($em, $class_object);
     }
@@ -23,9 +22,13 @@ abstract class SettingManager extends EntityRepository
     public function isUpdateAvailable($user, $version_key, $schema_version)
     {
         $user_fields_version = $this->getSetting($version_key, 'user_internal', $user);
-        if(!$user_fields_version) $user_fields_version = 0;
-        if($user_fields_version < $schema_version)
+        if (!$user_fields_version) {
+            $user_fields_version = 0;
+        }
+
+        if ($user_fields_version < $schema_version) {
             return true;
+        }
 
         return false;
     }
@@ -99,21 +102,28 @@ abstract class SettingManager extends EntityRepository
 
     }
 
+
     /**
      * Get setting by parameters
      */
-    public function getSetting($setting_key, $focus, $user = null)
+    public function getSetting($setting_key, $focus = null, $user = null)
     {
         $params = array();
         $params['setting_key'] = $setting_key;
-        $params['focus'] = $focus;
-        if($user)
+
+        if ($focus) {
+            $params['focus'] = $focus;
+        }
+
+        if ($user) {
             $params['user'] = $user;
+        }
 
         $setting = $this->findOneBy($params);
 
-        if($setting)
+        if ($setting) {
             return $setting->getValue();
+        }
 
         return null;
     }

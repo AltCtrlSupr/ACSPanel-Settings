@@ -11,9 +11,7 @@ use ACS\ACSPanelSettingsBundle\Event\FilterUserFieldsEvent;
 // TODO: Get this from config.yml
 use ACS\ACSPanelBundle\Entity\PanelSetting;
 // TODO: Get this from config.yml
-
 use ACS\ACSPanelBundle\Model\SettingManager;
-
 use ACS\ACSPanelSettingsBundle\Form\ConfigSettingCollectionType;
 use ACS\ACSPanelSettingsBundle\Form\ConfigSettingType;
 
@@ -23,7 +21,6 @@ use ACS\ACSPanelSettingsBundle\Form\ConfigSettingType;
  */
 class ConfigSettingController extends Controller
 {
-
     /**
      * It creates the object settings specified
      * // TODO: Move to SettingManager
@@ -193,7 +190,7 @@ class ConfigSettingController extends Controller
 
         // TODO: Check security issues not to call this method
         if ($editForm->isValid()) {
-            if(isset($postData['settings'])){
+            if (isset($postData['settings'])) {
                     $settings = $postData['settings'];
 
                     foreach ($settings as $setting) {
@@ -203,12 +200,15 @@ class ConfigSettingController extends Controller
                             'user' => $entity->getId(),
                             'setting_key' => $setting['setting_key'],
                         );
+
                         if(isset($setting['service_id'])){
                             $service = $em->getRepository('ACSACSPanelBundle:Service')->find($setting['service_id']);
                             $args['service'] = $service;
                         }
+
                         $panelsetting = $em->getRepository('ACSACSPanelBundle:PanelSetting')->findOneBy($args);
-                        if($panelsetting){
+
+                        if ($panelsetting && isset($setting['value'])) {
                             $panelsetting->setValue($setting['value']);
                             $em->persist($panelsetting);
                             $em->flush();

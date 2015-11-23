@@ -21,7 +21,6 @@ abstract class ConfigSetting
      */
     protected $key;
 
-
     /**
      * Get id
      *
@@ -77,7 +76,4 @@ abstract class ConfigSetting
     {
         return $this->setting_key;
     }
-
-
-
 }

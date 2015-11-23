@@ -39,8 +39,6 @@ EOT
 
         $setting_manager = $this->getContainer()->get('acs.setting_manager');
 
-	// TODO: Get user if is sepecified
-
         $output->writeln(sprintf('Created user <comment>%s</comment>', $username));
     }
 
