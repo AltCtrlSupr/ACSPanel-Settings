@@ -23,7 +23,10 @@ class ConfigSettingControllerTest extends CommonTestCase
         ));
 
         $crawler = $client->submit($form);
-        // ldd($crawler->html());
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        // Test createObjectSettingsAction
+        $crawler = $client->request('GET', '/settings/1/settings');
+        $this->assertTrue(200 === $client->getResponse()->getStatusCode());
     }
 }

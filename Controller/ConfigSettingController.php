@@ -17,13 +17,11 @@ use ACS\ACSPanelSettingsBundle\Form\ConfigSettingType;
 
 /**
  * ConfigSetting controller.
- *
  */
 class ConfigSettingController extends Controller
 {
     /**
      * It creates the object settings specified
-     * // TODO: Move to SettingManager
      */
     public function createObjectSettingsAction($object_id)
     {
@@ -31,44 +29,30 @@ class ConfigSettingController extends Controller
         $class_name = $this->container->getParameter('acs_settings.setting_class');
 
         // Get the object fields
-        // TODO: Decouple this
         $object = $em->getRepository('ACSACSPanelBundle:Service')->find($object_id);
         $object_fields = $object->getType()->getFieldTypes();
 
-        // TODO: Check in this point if user has rights to access to that service settings
-        // if (true === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
-            // $system_fields = $this->container->getParameter("acs_settings.system_fields");
-            // $user_fields = array_merge($user_fields, $system_fields);
-        // }
-
-
         $user = $this->get('security.context')->getToken()->getUser();
 
-        // $form_collection = new ConfigSettingCollectionType($user_fields);
         // Adding one form for each setting field
         foreach($object_fields as $id => $field_config){
-            // TODO: To get from config.yml
             $setting = $em->getRepository('ACSACSPanelBundle:PanelSetting')->findOneBy(
                 array(
                     'user' => $user->getId(),
                     'setting_key' => $field_config->getSettingKey(),
                     'focus' => 'object_setting',
-                    // TODO uncouple this
                     'service' => $object,
-                ));
+                )
+            );
 
-            if(!count($setting)){
+            if (!count($setting)) {
                 $setting = new $class_name;
                 $setting->setSettingKey($field_config->getSettingKey());
                 $setting->setValue($field_config->getDefaultValue());
                 $setting->setContext($field_config->getContext());
                 $setting->setLabel($field_config->getLabel());
                 $setting->setType($field_config->getType());
-                // TODO: implement choices
-                // if(isset($field_config['choices']))
-                    // $setting->setChoices($field_config['choices']);
                 $setting->setFocus('object_setting');
-                // TODO: Uncouple this
                 $setting->setService($object);
                 $user->addSetting($setting);
                 $em->persist($user);
@@ -77,7 +61,6 @@ class ConfigSettingController extends Controller
         }
 
         return $this->redirect($this->generateUrl('settings'));
-
     }
 
     /**
@@ -110,7 +93,6 @@ class ConfigSettingController extends Controller
 
     /**
      * Displays a form with all the user settings
-     *
      */
     public function panelSettingsAction()
     {
@@ -139,7 +121,6 @@ class ConfigSettingController extends Controller
 
     /**
      * Returns the context used to organize the settings view
-     *
      */
     private function getContexts($user)
     {
@@ -153,20 +134,19 @@ class ConfigSettingController extends Controller
             ->andWhere('ps.context NOT LIKE ?4')
             ->groupBy('ps.context')
             ->orderBy('ps.context')
-            ->setParameter('1',$user)
-            ->setParameter('2','internal')
-            ->setParameter('3','user_internal')
-            ->setParameter('4','system_internal')
-            ->getQuery();
+            ->setParameter('1', $user)
+            ->setParameter('2', 'internal')
+            ->setParameter('3', 'user_internal')
+            ->setParameter('4', 'system_internal')
+            ->getQuery()
+        ;
         $contexts = $query->execute();
 
         return $contexts;
     }
 
-
     /**
      * Edits an existing ConfigSetting entity.
-     *
      */
     public function updateAction(Request $request, $id)
     {
@@ -174,7 +154,6 @@ class ConfigSettingController extends Controller
         $user_fields = $this->loadUserFields();
         $em = $this->getDoctrine()->getManager();
 
-        // TODO: Get from config.yml
         $entity = $this->get('security.context')->getToken()->getUser();
 
         if (!$entity) {
@@ -188,14 +167,11 @@ class ConfigSettingController extends Controller
 
         $postData = $request->request->get('acs_settings_usersettings');
 
-        // TODO: Check security issues not to call this method
         if ($editForm->isValid()) {
             if (isset($postData['settings'])) {
                     $settings = $postData['settings'];
 
                     foreach ($settings as $setting) {
-
-                        // TODO: To get from config.yml
                         $args = array(
                             'user' => $entity->getId(),
                             'setting_key' => $setting['setting_key'],
@@ -224,5 +200,4 @@ class ConfigSettingController extends Controller
             'form'   => $editForm->createView(),
         ));
     }
-
 }

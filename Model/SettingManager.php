@@ -146,7 +146,7 @@ abstract class SettingManager extends EntityRepository
         $setting = $this->findOneBy($params);
 
         // We create the new setting if it not exists
-        if(!$setting){
+        if (!$setting) {
             $class_name = $this->container->getParameter('acs_settings.setting_class');
             $setting = new $class_name;
             $setting->setSettingKey($setting_key);
