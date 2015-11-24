@@ -86,7 +86,6 @@ abstract class SettingManager extends EntityRepository
         return $object_settings;
     }
 
-
     /**
      * Create the settings configured for specified object
      * TODO: Call from controller
@@ -99,9 +98,7 @@ abstract class SettingManager extends EntityRepository
         $object_fields = $object->getType()->getFieldTypes();
 
         $user = $this->get('security.context')->getToken()->getUser();
-
     }
-
 
     /**
      * Get setting by parameters
@@ -138,13 +135,15 @@ abstract class SettingManager extends EntityRepository
         $params = array();
         $params['setting_key'] = $setting_key;
         $params['focus'] = $focus;
-        if($context)
+
+        if ($context) {
             $params['context'] = $context;
-        if($user)
+        }
+        if ($user) {
             $params['user'] = $user;
+        }
 
         $setting = $this->findOneBy($params);
-
 
         // We create the new setting if it not exists
         if(!$setting){
@@ -173,7 +172,6 @@ abstract class SettingManager extends EntityRepository
 
     /**
      * Gets user focus config value from database
-     * @todo: Maybe could be good caching those values...
      */
     public function getUserSetting($setting_key, $user)
     {
@@ -183,7 +181,6 @@ abstract class SettingManager extends EntityRepository
 
     /**
      * Gets system focus config values from database
-     * @todo: Maybe could be good caching those values...
      */
     public function getSystemSetting($setting_key)
     {
@@ -193,7 +190,6 @@ abstract class SettingManager extends EntityRepository
 
     /**
      * Gets internal focus config values from database
-     * @todo: Maybe could be good caching those values...
      */
     public function getInternalSetting($setting_key)
     {

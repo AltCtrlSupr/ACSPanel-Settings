@@ -1,4 +1,5 @@
 <?php
+
 namespace ACS\ACSPanelSettingsBundle\Form\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -7,13 +8,11 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-
 /**
  * AdaptFormSuscriber
  *
- * @author genar
+ * @author Genar
  */
-
 class AdaptFormSubscriber implements EventSubscriberInterface
 {
     private $factory;
@@ -93,6 +92,4 @@ class AdaptFormSubscriber implements EventSubscriberInterface
         }
         // $form->add($this->factory->createNamed('value','text',$data->getValue(),array('label' => $data->getLabel())));
     }
-
 }
-

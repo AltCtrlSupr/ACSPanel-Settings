@@ -18,6 +18,8 @@ class ConfigSettingControllerTest extends CommonTestCase
         // Form should accept empty protected dir
         $form = $crawler->selectButton('Save')->form(array(
             'acs_settings_usersettings[settings][10][value]' => 'dns.acs.li',
+            'acs_settings_usersettings[settings][4][value]' => 'testing',
+            'acs_settings_usersettings[settings][5][value]' => 'testing'
         ));
 
         $crawler = $client->submit($form);

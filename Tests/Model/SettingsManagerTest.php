@@ -7,6 +7,10 @@ use ACS\ACSPanelSettingsBundle\Doctrine\SettingManager;
 
 class SettingsManagerTest extends CommonTestCase
 {
+    public function testSetSetting()
+    {
+    }
+
     public function testGetSetting()
     {
         $settingManager = $this->getContainer()->get('acs.setting_manager');
