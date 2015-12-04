@@ -105,44 +105,17 @@ class ConfigSettingController extends Controller
 
         $object_settings = $settingmanager->getObjectSettingsPrototype($user);
 
-
         array_merge($user_fields, $object_settings);
 
         $form = $this->createForm(new ConfigSettingCollectionType($user_fields, $em), $user);
 
-        $contexts = $this->getContexts($user);
+        $contexts = $settingmanager->getContexts($user);
 
         return $this->render('ACSACSPanelSettingsBundle:ConfigSetting:edit.html.twig', array(
             'entity' => $user,
             'contexts' => $contexts,
             'form'   => $form->createView(),
         ));
-    }
-
-    /**
-     * Returns the context used to organize the settings view
-     */
-    private function getContexts($user)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $contexts_rep = $em->getRepository('ACSACSPanelBundle:PanelSetting');
-        $query = $contexts_rep->createQueryBuilder('ps')
-            ->select('ps.context')
-            ->where('ps.user = ?1')
-            ->andWhere('ps.context NOT LIKE ?2')
-            ->andWhere('ps.context NOT LIKE ?3')
-            ->andWhere('ps.context NOT LIKE ?4')
-            ->groupBy('ps.context')
-            ->orderBy('ps.context')
-            ->setParameter('1', $user)
-            ->setParameter('2', 'internal')
-            ->setParameter('3', 'user_internal')
-            ->setParameter('4', 'system_internal')
-            ->getQuery()
-        ;
-        $contexts = $query->execute();
-
-        return $contexts;
     }
 
     /**

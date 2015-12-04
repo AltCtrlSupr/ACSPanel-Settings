@@ -48,19 +48,19 @@ class AdaptFormSubscriber implements EventSubscriberInterface
         // Get the settings for that specific field
         $field_config = array();
         $fields = $this->user_fields;
-        foreach($fields as $field){
-            if($data->getSettingKey() == $field['setting_key'])
+        foreach ($fields as $field) {
+            if ($data->getSettingKey() === $field['setting_key']) {
                 $field_config = $field;
+            }
         }
 
         if($data->getService()){
-                $form->add($this->factory->createNamed('service_id','hidden',$data->getService()->getId(),array('mapped' => false, 'auto_initialize' => false)));
+            $form->add($this->factory->createNamed('service_id','hidden',$data->getService()->getId(),array('mapped' => false, 'auto_initialize' => false)));
         }
 
-
         // TODO: Check why is receiving
-        if(!empty($field_config)){
-            switch($field_config['field_type']){
+        if (!empty($field_config)) {
+            switch ($field_config['field_type']) {
                 case 'select':
                     $choices = $field_config['choices'];
                     $form->add($this->factory->createNamed('value','choice',$data->getValue(), array(
@@ -73,23 +73,24 @@ class AdaptFormSubscriber implements EventSubscriberInterface
                     $form->add($this->factory->createNamed('value','hidden',$data->getValue(),array(
                         'label' => $field_config['label'],
                         'auto_initialize' => false,
+                        'required' => false
                     )));
                     break;
                 case 'text':
                     $form->add($this->factory->createNamed('value','text',$data->getValue(),array(
                         'label' => $field_config['label'],
                         'auto_initialize' => false,
+                        'required' => false
                     )));
                     break;
                 case 'password':
                     $form->add($this->factory->createNamed('value','password',$data->getValue(),array(
                         'label' => $field_config['label'],
                         'auto_initialize' => false,
+                        'required' => false
                     )));
                     break;
-
             }
         }
-        // $form->add($this->factory->createNamed('value','text',$data->getValue(),array('label' => $data->getLabel())));
     }
 }

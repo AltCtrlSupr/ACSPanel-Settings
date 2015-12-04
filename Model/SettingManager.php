@@ -196,4 +196,34 @@ abstract class SettingManager extends EntityRepository
         $setting = $this->getSetting($setting_key, 'internal');
         return $setting;
     }
+
+    /**
+     * Returns the context used to organize the settings view
+     */
+    public function getContexts($user)
+    {
+        $em = $this->getEntityManager();
+
+        $contexts_rep = $em->getRepository('ACSACSPanelBundle:PanelSetting');
+        $query = $contexts_rep->createQueryBuilder('ps')
+            ->select('ps.context')
+            ->where('ps.user = ?1')
+            ->andWhere('ps.context NOT LIKE ?2')
+            ->andWhere('ps.context NOT LIKE ?3')
+            ->andWhere('ps.context NOT LIKE ?4')
+            ->groupBy('ps.context')
+            ->orderBy('ps.context')
+            ->setParameter('1', $user)
+            ->setParameter('2', 'internal')
+            ->setParameter('3', 'user_internal')
+            ->setParameter('4', 'system_internal')
+            ->getQuery()
+        ;
+
+        $contexts = $query->execute();
+
+        return $contexts;
+    }
+
+
 }

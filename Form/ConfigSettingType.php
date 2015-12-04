@@ -9,7 +9,6 @@ use ACS\ACSPanelSettingsBundle\Form\EventListener\AdaptFormSubscriber;
 
 class ConfigSettingType extends AbstractType
 {
-
     public $user_fields;
     public $em;
 
@@ -31,17 +30,13 @@ class ConfigSettingType extends AbstractType
 
         $subscriber = new AdaptFormSubscriber($builder->getFormFactory(), $user_fields);
         $builder->addEventSubscriber($subscriber);
-
-
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        // TODO: Get value from config.yml
         $resolver->setDefaults(array(
             'data_class' => 'ACS\ACSPanelBundle\Entity\PanelSetting',
         ));
-
     }
 
     public function getName()
