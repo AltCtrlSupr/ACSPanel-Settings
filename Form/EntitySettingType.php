@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use ACS\ACSPanelSettingsBundle\Form\EventListener\AdaptFormSubscriber;
 
-class ServiceSettingType extends AbstractType
+class EntitySettingType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
