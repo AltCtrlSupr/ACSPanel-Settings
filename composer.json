@@ -18,8 +18,5 @@
             "email": "genar@acs.li",
             "homepage": "http://genar.me/"
         }
-    ],
-    "autoload": {
-        "classmap": [""]
-    }
+    ]
 }
