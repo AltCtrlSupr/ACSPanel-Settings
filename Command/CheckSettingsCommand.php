@@ -6,13 +6,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use FOS\UserBundle\Model\User; 
+use FOS\UserBundle\Model\User;
 
-/**
- * @author Matthieu Bontemps <matthieu@knplabs.com>
- * @author Thibault Duplessis <thibault.duplessis@gmail.com>
- * @author Luis Cordova <cordoval@gmail.com>
- */
 class CheckSettingsCommand extends ContainerAwareCommand
 {
     /**
@@ -31,8 +26,6 @@ The <info>acssettings:check-and-dump</info> command check the panel_settings.yml
 
   <info>php app/console acssettings:check-and-dump username</info>
 
-This interactive shell will ask you for an email and then a password.
-
 EOT
             );
     }
@@ -45,8 +38,6 @@ EOT
         $username   = $input->getArgument('username');
 
         $setting_manager = $this->getContainer()->get('acs.setting_manager');
-
-	// TODO: Get user if is sepecified
 
         $output->writeln(sprintf('Created user <comment>%s</comment>', $username));
     }

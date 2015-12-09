@@ -7,17 +7,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use ACS\ACSPanelSettingsBundle\Form\EventListener\AdaptFormSubscriber;
 
-class ConfigSettingType extends AbstractType
+class EntitySettingType extends AbstractType
 {
-    public $user_fields;
-    public $em;
-
-    public function __construct($em, $user_fields)
-    {
-        $this->user_fields = $user_fields;
-        $this->em = $em;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $user_fields = $this->user_fields;

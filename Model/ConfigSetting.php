@@ -1,4 +1,5 @@
 <?php
+
 namespace ACS\ACSPanelSettingsBundle\Model;
 
 /**
@@ -20,7 +21,6 @@ abstract class ConfigSetting
      * @var string
      */
     protected $key;
-
 
     /**
      * Get id
@@ -77,7 +77,4 @@ abstract class ConfigSetting
     {
         return $this->setting_key;
     }
-
-
-
 }

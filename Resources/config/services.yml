@@ -1,5 +1,4 @@
 parameters:
-    # TODO: Set this value from config.yml
     acs_settings.settings.class: ACS\ACSPanelSettingsBundle\Doctrine\SettingManager
     acs_settings.system_settings.class: ACS\ACSPanelSettingsBundle\Modules\SystemSettings
     acs_settings.setting_class: ACS\ACSPanelBundle\Entity\PanelSetting

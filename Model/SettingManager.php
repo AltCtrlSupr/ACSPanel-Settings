@@ -12,7 +12,6 @@ abstract class SettingManager extends EntityRepository
     {
         $this->container = $container;
         $class_object = new ClassMetadata($class);
-        $this->container = $container;
 
         parent::__construct($em, $class_object);
     }
@@ -23,9 +22,13 @@ abstract class SettingManager extends EntityRepository
     public function isUpdateAvailable($user, $version_key, $schema_version)
     {
         $user_fields_version = $this->getSetting($version_key, 'user_internal', $user);
-        if(!$user_fields_version) $user_fields_version = 0;
-        if($user_fields_version < $schema_version)
+        if (!$user_fields_version) {
+            $user_fields_version = 0;
+        }
+
+        if ($user_fields_version < $schema_version) {
             return true;
+        }
 
         return false;
     }
@@ -83,7 +86,6 @@ abstract class SettingManager extends EntityRepository
         return $object_settings;
     }
 
-
     /**
      * Create the settings configured for specified object
      * TODO: Call from controller
@@ -96,24 +98,29 @@ abstract class SettingManager extends EntityRepository
         $object_fields = $object->getType()->getFieldTypes();
 
         $user = $this->get('security.context')->getToken()->getUser();
-
     }
 
     /**
      * Get setting by parameters
      */
-    public function getSetting($setting_key, $focus, $user = null)
+    public function getSetting($setting_key, $focus = null, $user = null)
     {
         $params = array();
         $params['setting_key'] = $setting_key;
-        $params['focus'] = $focus;
-        if($user)
+
+        if ($focus) {
+            $params['focus'] = $focus;
+        }
+
+        if ($user) {
             $params['user'] = $user;
+        }
 
         $setting = $this->findOneBy($params);
 
-        if($setting)
+        if ($setting) {
             return $setting->getValue();
+        }
 
         return null;
     }
@@ -128,16 +135,18 @@ abstract class SettingManager extends EntityRepository
         $params = array();
         $params['setting_key'] = $setting_key;
         $params['focus'] = $focus;
-        if($context)
+
+        if ($context) {
             $params['context'] = $context;
-        if($user)
+        }
+        if ($user) {
             $params['user'] = $user;
+        }
 
         $setting = $this->findOneBy($params);
 
-
         // We create the new setting if it not exists
-        if(!$setting){
+        if (!$setting) {
             $class_name = $this->container->getParameter('acs_settings.setting_class');
             $setting = new $class_name;
             $setting->setSettingKey($setting_key);
@@ -163,7 +172,6 @@ abstract class SettingManager extends EntityRepository
 
     /**
      * Gets user focus config value from database
-     * @todo: Maybe could be good caching those values...
      */
     public function getUserSetting($setting_key, $user)
     {
@@ -173,7 +181,6 @@ abstract class SettingManager extends EntityRepository
 
     /**
      * Gets system focus config values from database
-     * @todo: Maybe could be good caching those values...
      */
     public function getSystemSetting($setting_key)
     {
@@ -183,11 +190,40 @@ abstract class SettingManager extends EntityRepository
 
     /**
      * Gets internal focus config values from database
-     * @todo: Maybe could be good caching those values...
      */
     public function getInternalSetting($setting_key)
     {
         $setting = $this->getSetting($setting_key, 'internal');
         return $setting;
     }
+
+    /**
+     * Returns the context used to organize the settings view
+     */
+    public function getContexts($user)
+    {
+        $em = $this->getEntityManager();
+
+        $contexts_rep = $em->getRepository('ACSACSPanelBundle:PanelSetting');
+        $query = $contexts_rep->createQueryBuilder('ps')
+            ->select('ps.context')
+            ->where('ps.user = ?1')
+            ->andWhere('ps.context NOT LIKE ?2')
+            ->andWhere('ps.context NOT LIKE ?3')
+            ->andWhere('ps.context NOT LIKE ?4')
+            ->groupBy('ps.context')
+            ->orderBy('ps.context')
+            ->setParameter('1', $user)
+            ->setParameter('2', 'internal')
+            ->setParameter('3', 'user_internal')
+            ->setParameter('4', 'system_internal')
+            ->getQuery()
+        ;
+
+        $contexts = $query->execute();
+
+        return $contexts;
+    }
+
+
 }
