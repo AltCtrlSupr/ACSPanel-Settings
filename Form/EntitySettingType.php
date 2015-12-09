@@ -11,7 +11,7 @@ class EntitySettingType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $user_fields = $this->user_fields;
+        $user_fields = array();
 
         $builder
             ->add('setting_key','hidden')
