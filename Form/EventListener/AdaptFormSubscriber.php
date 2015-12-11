@@ -18,7 +18,7 @@ class AdaptFormSubscriber implements EventSubscriberInterface
     private $factory;
     public $user_fields;
 
-    public function __construct(FormFactoryInterface $factory, $user_fields)
+    public function __construct(FormFactoryInterface $factory, $user_fields = array())
     {
         $this->factory = $factory;
         $this->user_fields = $user_fields;
@@ -48,6 +48,7 @@ class AdaptFormSubscriber implements EventSubscriberInterface
         // Get the settings for that specific field
         $field_config = array();
         $fields = $this->user_fields;
+
         foreach ($fields as $field) {
             if ($data->getSettingKey() === $field['setting_key']) {
                 $field_config = $field;

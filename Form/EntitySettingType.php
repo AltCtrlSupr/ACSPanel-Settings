@@ -9,6 +9,15 @@ use ACS\ACSPanelSettingsBundle\Form\EventListener\AdaptFormSubscriber;
 
 class EntitySettingType extends AbstractType
 {
+    public $user_fields;
+    public $container;
+
+    public function __construct($container, $user_fields)
+    {
+        $this->user_fields = $user_fields;
+        $this->container = $container;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $user_fields = array();

@@ -3,6 +3,8 @@ namespace ACS\ACSPanelSettingsBundle\Model;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use ACS\ACSPanelSettingsBundle\Event\SettingsEvents;
+use ACS\ACSPanelSettingsBundle\Event\FilterUserFieldsEvent;
 
 abstract class SettingManager extends EntityRepository
 {
@@ -225,5 +227,30 @@ abstract class SettingManager extends EntityRepository
         return $contexts;
     }
 
+    /**
+     * Load the settings array to pass to form
+     */
+    function loadUserFields()
+    {
+        $user_fields = array();
 
+        $this->container->get('event_dispatcher')->dispatch(SettingsEvents::BEFORE_LOAD_USERFIELDS, new FilterUserFieldsEvent($user_fields, $this->container));
+
+        array_merge($user_fields, $user_fields = $this->container->getParameter("acs_settings.user_fields"));
+
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        // If is admins we load the global system settings
+        if (true === $this->container->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
+            $user_fields = array_merge($user_fields, $system_fields = $this->container->getParameter("acs_settings.system_fields"));
+        }
+
+        $object_settings = $this->container->get('acs.setting_manager')->getObjectSettingsPrototype($user);
+
+        $user_fields = array_merge($user_fields, $object_settings);
+
+        $this->container->get('event_dispatcher')->dispatch(SettingsEvents::AFTER_LOAD_USERFIELDS, new FilterUserFieldsEvent($user_fields,$this->container));
+
+        return $user_fields;
+    }
 }
