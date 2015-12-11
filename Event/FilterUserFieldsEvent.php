@@ -23,5 +23,4 @@ class FilterUserFieldsEvent extends Event
     {
         return $this->user_fields;
     }
-
 }

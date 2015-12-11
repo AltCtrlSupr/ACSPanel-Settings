@@ -9,18 +9,18 @@ use ACS\ACSPanelSettingsBundle\Form\EventListener\AdaptFormSubscriber;
 
 class EntitySettingType extends AbstractType
 {
-    public $user_fields;
+    public $fields;
     public $container;
 
-    public function __construct($container, $user_fields)
+    public function __construct($container, $fields)
     {
-        $this->user_fields = $user_fields;
+        $this->fields = $fields;
         $this->container = $container;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $user_fields = array();
+        $fields = array();
 
         $builder
             ->add('setting_key','hidden')
@@ -28,7 +28,7 @@ class EntitySettingType extends AbstractType
             ->add('focus', 'hidden')
         ;
 
-        $subscriber = new AdaptFormSubscriber($builder->getFormFactory(), $user_fields);
+        $subscriber = new AdaptFormSubscriber($builder->getFormFactory(), $fields);
         $builder->addEventSubscriber($subscriber);
     }
 

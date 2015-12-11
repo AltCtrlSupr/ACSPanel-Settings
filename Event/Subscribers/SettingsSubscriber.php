@@ -18,8 +18,6 @@ class SettingsSubscriber implements EventSubscriberInterface
         );
     }
 
-
-
     /**
      * Create new added fields to user or missing fields
      *

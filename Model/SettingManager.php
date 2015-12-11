@@ -1,4 +1,5 @@
 <?php
+
 namespace ACS\ACSPanelSettingsBundle\Model;
 
 use Doctrine\ORM\EntityRepository;
@@ -44,10 +45,10 @@ abstract class SettingManager extends EntityRepository
         $user = $this->container->get('security.context')->getToken()->getUser();
 
         foreach($fields as $field){
-
-            if(!$this->getSetting($field['setting_key'], $field['focus'], $user)){
-                if(!isset($field['default_value']))
+            if (!$this->getSetting($field['setting_key'], $field['focus'], $user)) {
+                if(!isset($field['default_value'])) {
                     $field['default_value'] = '';
+                }
                 $this->setSetting($field['setting_key'], $field['focus'], $field['default_value'], $field['context'], $user);
             }
         }
@@ -99,7 +100,7 @@ abstract class SettingManager extends EntityRepository
         $object = $em->getRepository('ACSACSPanelBundle:Service')->find($object_id);
         $object_fields = $object->getType()->getFieldTypes();
 
-        $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->container->get('security.context')->getToken()->getUser();
     }
 
     /**
