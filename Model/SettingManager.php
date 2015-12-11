@@ -73,7 +73,6 @@ abstract class SettingManager extends EntityRepository
         foreach ($settings_objects as $setting_obj){
             $object_fields = $setting_obj->getType()->getFieldTypes();
             foreach($object_fields as $field){
-                // TODO: Create filter to do this.. :)
                 $object_settings[] = array(
                     'setting_key' => $field->getSettingKey(),
                     'label' => $field->getLabel(),
@@ -91,7 +90,6 @@ abstract class SettingManager extends EntityRepository
 
     /**
      * Create the settings configured for specified object
-     * TODO: Call from controller
      */
     public function loadObjectSettingsDefaults($object_id)
     {
@@ -100,7 +98,7 @@ abstract class SettingManager extends EntityRepository
         $object = $em->getRepository('ACSACSPanelBundle:Service')->find($object_id);
         $object_fields = $object->getType()->getFieldTypes();
 
-        $user = $this->container->get('security.context')->getToken()->getUser();
+        return $object_fields;
     }
 
     /**
