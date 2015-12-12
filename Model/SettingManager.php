@@ -57,17 +57,13 @@ abstract class SettingManager extends EntityRepository
     }
 
     /**
-     * TODO: Prepare to get prototype for any tipe of object
      */
-    public function getObjectSettingsPrototype($user, $object_class = 'ACSACSPanelBundle:Service')
+    public function getObjectSettingsPrototype($id, $object_class = 'ACSACSPanelBundle:Service')
     {
-        // TODO: Transform object_fields to config like array
         // Get the object fields
         $em = $this->getEntityManager();
 
-        $settings_objects = $em->getRepository($object_class)->findBy(array(
-            'user' => $user
-        ));
+        $settings_objects = $em->getRepository($object_class)->findById($id);
 
         $object_settings = array();
         foreach ($settings_objects as $setting_obj){
