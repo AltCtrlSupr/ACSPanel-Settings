@@ -185,6 +185,12 @@ abstract class SettingManager extends EntityRepository
         return $setting;
     }
 
+    public function getSystemSettings()
+    {
+        $settings = $this->findBy(array('focus' => 'system_setting'));
+        return $settings;
+    }
+
     /**
      * Gets internal focus config values from database
      */
